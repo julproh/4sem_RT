@@ -44,27 +44,27 @@ Vector2D::~Vector2D()
     
 }
 
-Vector2D* Vector2D::operator*(double a)
-{
-    Vector2D* newVector = new Vector2D(a * this->get_x(), a * this->get_y());
-    return newVector;
-}
+// Vector2D* Vector2D::operator*(double a)
+// {
+//     Vector2D* newVector = new Vector2D(a * this->get_x(), a * this->get_y());
+//     return newVector;
+// }
 
 double Vector2D::operator*(Vector2D* a)
 {
     return this->get_x() * a->get_x() + this->get_y() * a->get_y(); 
 }
 
-Vector2D* Vector2D::operator+(Vector2D* a)
-{
-    Vector2D* newVector = new Vector2D(this->get_x() + a->get_x(), this->get_y() + a->get_y());
-    return newVector;
-}
+// Vector2D* Vector2D::operator+(Vector2D* a)
+// {
+//     Vector2D* newVector = new Vector2D(this->get_x() + a->get_x(), this->get_y() + a->get_y());
+//     return newVector;
+// }
 
-Vector2D* Vector2D::operator-(Vector2D* a)
+Vector2D & operator-(Vector2D& left, Vector2D& right)
 {
-    Vector2D* newVector = new Vector2D(this->get_x() - a->get_x(), this->get_y() - a->get_y());
-    return newVector;
+    Vector2D* newVector = new Vector2D(left.get_x() - right.get_x(), left.get_y() - right.get_y());
+    return *newVector;
 }
 
 Vector2D* Vector2D::operator/(double a)
@@ -112,7 +112,7 @@ Vector2D & operator -- (Vector2D &A, int a) {
 std::ostream & operator << (std::ostream& out, Vector2D &a ) {
     out << a.get_x() << " " << a.get_y() << std::endl;
     return out;
-}
+};
 
 
 std::istream & operator >> (std::istream& in, Vector2D &a ) {
@@ -121,13 +121,20 @@ std::istream & operator >> (std::istream& in, Vector2D &a ) {
     a.set_x(x);
     a.set_y(y);
     return in;
+};
+
+Vector2D & operator + (Vector2D &A) {
+
+    return A;
 }
 
-//Задание 
+Vector2D & operator - (Vector2D &A) {
+    return *new Vector2D(-A.get_x(), -A.get_y());
+}
 
-//vector 
+
+//Задание 
 /*
-сделать b+=a; b =-a;
-+, -, ++, *, v*N, N*v, V*V, ++, -- - префикс и постфикс, +=, -=, *=N
-=, ==, !=, <, >, <=, >=, &&, ||, !, >>, <<, M*V
++, -, ++, *, v*N, N*v, V*V, +=, -=, *=N
+=, ==, !=, <, >, <=, >=, &&, ||, !, M*V
 */
